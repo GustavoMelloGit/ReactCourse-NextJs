@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { MongoClient } from "mongodb";
 import MeetupList from "../components/meetups/MeetupList";
+import secret from "../secret";
 
 export default function HomePage(props) {
   return (
@@ -23,9 +24,7 @@ export default function HomePage(props) {
 // }
 
 export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    "mongodb+srv://gustavo:V73zC8eiklD0ds4O@cluster0.vmwiv.mongodb.net/meetups?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(secret);
   const db = client.db();
 
   const meetupsCollection = db.collection("meetups");
